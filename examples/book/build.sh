@@ -1,0 +1,1 @@
+pandoc "document.md" -o "document.pdf" --from markdown --template "../../eisvogel/eisvogel.tex" --listings --top-level-division="chapter" --pdf-engine "tectonic"

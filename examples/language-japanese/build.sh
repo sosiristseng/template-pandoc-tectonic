@@ -1,0 +1,2 @@
+# No lang option (-V lang=jp) here because Japanese unsupported in polyglossia.
+pandoc "document.md" -o "document.pdf" --from markdown --template "../../eisvogel/eisvogel.tex" --listings --pdf-engine "tectonic" -V CJKmainfont="Noto Sans CJK JP"

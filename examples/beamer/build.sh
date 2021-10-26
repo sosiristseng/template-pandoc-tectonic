@@ -1,0 +1,1 @@
+pandoc "document.md" -o "document.pdf" --from markdown --to beamer --template "../../eisvogel/eisvogel.tex" --listings --pdf-engine "tectonic"

@@ -1,0 +1,54 @@
+name: Build Example PDF files
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive  # Fetch Hugo themes (true OR recursive)
+    - name: Tectonic Cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/Tectonic
+        key: ${{ runner.os }}-tectonic-${{ hashFiles('**/*.tex') }}
+        restore-keys: |
+          ${{ runner.os }}-tectonic-
+    - name: Pip Cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+    - name: Setup tectonic LaTeX engine
+      uses: wtfjoke/setup-tectonic@v1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }} 
+    - name: Setup Python dependencies
+      run: python -m pip install pandoc-latex-environment
+    - name: Setup fonts and image convertion tool
+      run: sudo apt-get update -qq && sudo apt-get install noto-fonts poppler-utils -y
+    - name: Build pdf files
+      run: |
+        chmod +x ./examples/build-examples.sh
+        ./examples/build-examples.sh
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-files
+        path: |
+          examples/*/document.pdf
+          examples/*/preview.png
+    
+    # - name: Deploy
+    #   uses: peaceiris/actions-gh-pages@v3.8.0
+    #   if: github.ref == 'refs/heads/main'
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     force_orphan: true
+    #     publish_dir: ./public
