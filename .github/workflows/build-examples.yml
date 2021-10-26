@@ -38,9 +38,7 @@ jobs:
     - name: Setup fonts and image convertion tool
       run: sudo apt-get update -qq && sudo apt-get install fonts-noto poppler-utils -y
     - name: Build pdf files
-      run: |
-        chmod +x ./examples/build-examples.sh
-        ./examples/build-examples.sh
+      run: cd examples && bash build-examples.sh && cd ..
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
       with:
