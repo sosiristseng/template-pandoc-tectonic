@@ -25,6 +25,10 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: '3.9' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+    - name: Setup Pandoc
+      uses: r-lib/actions/setup-pandoc@v1
+      with:
+        pandoc-version: '2.15' # The pandoc version to download (if necessary) and use.
     - name: Setup tectonic LaTeX engine
       uses: wtfjoke/setup-tectonic@v1
       with:
