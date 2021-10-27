@@ -6,7 +6,7 @@ This template uses
 
 - [pandoc](https://pandoc.org/), a universal document converter. 
 - [tectonic](https://tectonic-typesetting.github.io/en-US/), a modernized, complete, self-contained TeX/LaTeX engine.
-- [Eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template), a clean pandoc LaTeX template to convert your markdown files to PDF or LaTeX, which is under BSD 3-Clause "New" or "Revised" License.
+- [Eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template), a clean pandoc LaTeX template to convert your markdown files to PDF or LaTeX.
 - [GitHub actions](https://github.com/features/actions), to compile pushed Markdown files to pdf documents automatically.
 
 ## How to develop this template
