@@ -16,7 +16,3 @@ Clone this repository along with its submodule:
 ```bash
 git clone https://github.com/sosiristseng/template-pandoc-tectonic.git --recursive
 ```
-
-## TO-DOs
-
-- [ ] GitLab CI/CD
