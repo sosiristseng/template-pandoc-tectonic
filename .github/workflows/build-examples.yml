@@ -21,9 +21,10 @@ jobs:
       with:
         python-version: '3.9' # Version range or exact version of a Python version to use, using SemVer's version range syntax
     - name: Setup Pandoc
-      uses: r-lib/actions/setup-pandoc@v1
-      with:
-        pandoc-version: '2.15' # The pandoc version to download (if necessary) and use.
+      env: 
+        PDC_VER: '2.16.1'
+      run: |
+        wget -qO- https://github.com/jgm/pandoc/releases/download/${PDC_VER}/pandoc-${PDC_VER}-linux-amd64.tar.gz | sudo tar xzf - --strip-components 1 -C /usr/local/
     - name: Setup tectonic LaTeX engine
       uses: wtfjoke/setup-tectonic@v1
       with:
