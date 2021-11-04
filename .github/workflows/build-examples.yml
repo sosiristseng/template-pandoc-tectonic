@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        submodules: recursive  # Fetch Hugo themes (true OR recursive)
+        submodules: recursive
     - name: Tectonic Cache
       uses: actions/cache@v2
       with:
