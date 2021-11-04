@@ -16,11 +16,6 @@ jobs:
         key: ${{ runner.os }}-tectonic-${{ hashFiles('**/*.tex') }}
         restore-keys: |
           ${{ runner.os }}-tectonic-
-    - name: Pip Cache
-      uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
