@@ -18,7 +18,7 @@ tests:
 pages:
   script:
   - pandoc --standalone ./examples/index.md -o ./examples/index.html
-  - mv exmaples public
+  - mv examples public
   artifacts:
     paths:
     - public
