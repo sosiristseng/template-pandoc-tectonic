@@ -1,0 +1,26 @@
+image: condaforge/mambaforge:latest
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+before_script:
+  - mamba install pandoc tectonic -c conda-forge -y
+  - pip install -U pandoc-latex-environment
+  - apt-get update -qq && apt-get install fonts-noto-cjk poppler-utils -y
+  - cd examples && bash build-examples.sh && cd ..
+
+tests:
+  script:
+  - echo "Build complete!"
+  except:
+  - main
+
+pages:
+  script:
+  - pandoc --standalone ./examples/index.md -o ./examples/index.html
+  - mv exmaples public
+  artifacts:
+    paths:
+    - public
+  only:
+  - main
