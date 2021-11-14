@@ -1,6 +1,8 @@
-# Pandoc tectonic template
-
-Compile Markdown files to beautiful PDF documents.
+---
+title: Pandoc tectonic template
+subtitle: Building publication-ready documents from Markdown
+toc: true
+---
 
 This template is powered by:
 
