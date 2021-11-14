@@ -4,9 +4,9 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
 before_script:
-  - mamba install pandoc tectonic -c conda-forge -y
-  - pip install -U pandoc-latex-environment
-  - apt-get update -qq && apt-get install fonts-noto-cjk poppler-utils -y
+  - mamba env create -f environment.yml
+  - source activate tectonic
+  - apt-get update -qq && apt-get install fonts-noto-cjk -y
   - cd examples && bash build-examples.sh && cd ..
 
 tests:
@@ -17,7 +17,7 @@ tests:
 
 pages:
   script:
-  - pandoc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html  --toc
+  - pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
   - mv examples public
   artifacts:
     paths:
