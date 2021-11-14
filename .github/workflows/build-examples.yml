@@ -44,7 +44,7 @@ jobs:
           examples/*/preview.png
     - name: Build index page
       run: |
-        pandoc --standalone ./examples/index.md -o ./examples/index.html
+        pandoc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html 
     - name: Deploy to GitHub pages
       uses: peaceiris/actions-gh-pages@v3.8.0
       if: github.ref == 'refs/heads/main'

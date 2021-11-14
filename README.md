@@ -1,6 +1,6 @@
 # Pandoc tectonic template
 
-Compile Markdown files to beautiful PDF document by `pandoc` and `tectonic`.
+Compile Markdown files to beautiful PDF document, powered by `pandoc` and `tectonic`.
 
 This template uses
 
@@ -8,15 +8,12 @@ This template uses
 - [tectonic](https://tectonic-typesetting.github.io/en-US/), a modernized, complete, self-contained TeX/LaTeX engine.
 - [Eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template), a clean pandoc LaTeX template to convert your markdown files to PDF or LaTeX.
 - [GitHub actions](https://github.com/features/actions), to compile pushed Markdown files to pdf documents automatically.
+- [Pandoc HTML5 template](https://github.com/tajmone/pandoc-goodies) by © Tristano Ajmone.
 
 ## How to develop this template
 
 Clone this repository along with its submodule:
 
 ```bash
-git clone https://github.com/sosiristseng/template-pandoc-tectonic.git --recursive
+git clone --recursive https://github.com/sosiristseng/template-pandoc-tectonic.git 
 ```
-
-## Misc
-
-TBD.
