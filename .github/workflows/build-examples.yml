@@ -5,6 +5,10 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Login shell, for conda commands to be available
+    defaults:
+      run:
+        shell: bash -l {0}
     steps:
     - uses: actions/checkout@v2
       with:
@@ -16,23 +20,25 @@ jobs:
         key: ${{ runner.os }}-tectonic-${{ hashFiles('**/*.tex') }}
         restore-keys: |
           ${{ runner.os }}-tectonic-
-    - name: Setup Python
-      uses: actions/setup-python@v2
+    - name: Cache conda
+      uses: actions/cache@v2
+      env:
+        # Increase this value to forcefully reset cache
+        CACHE_NUMBER: 0
       with:
-        python-version: '3.9' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-    - name: Setup Pandoc
-      env: 
-        PDC_VER: '2.16.1'
-      run: |
-        wget -qO- https://github.com/jgm/pandoc/releases/download/${PDC_VER}/pandoc-${PDC_VER}-linux-amd64.tar.gz | sudo tar xzf - --strip-components 1 -C /usr/local/
-    - name: Setup tectonic LaTeX engine
-      uses: wtfjoke/setup-tectonic@v1
+        path: ~/conda_pkgs_dir
+        key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{hashFiles('environment.yml') }}
+    - name: Setup MambaForge
+      uses: conda-incubator/setup-miniconda@v2
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }} 
-    - name: Setup Python dependencies
-      run: python -m pip install pandoc-latex-environment
+        python-version: '3.9'
+        miniforge-variant: Mambaforge
+        miniforge-version: latest
+        activate-environment: tectonic
+        environment-file: environment.yml
+        use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
     - name: Setup fonts and image convertion tool
-      run: sudo apt-get update -qq && sudo apt-get install fonts-noto-cjk poppler-utils -y
+      run: sudo apt-get update -qq && sudo apt-get install fonts-noto-cjk -y
     - name: Build pdf files
       run: cd examples && bash build-examples.sh && cd ..
     - name: Archive production artifacts
@@ -44,7 +50,7 @@ jobs:
           examples/*/preview.png
     - name: Build index page
       run: |
-        pandoc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html --toc
+        pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
     - name: Deploy to GitHub pages
       uses: peaceiris/actions-gh-pages@v3.8.0
       if: github.ref == 'refs/heads/main'
