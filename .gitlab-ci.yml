@@ -17,7 +17,7 @@ tests:
 
 pages:
   script:
-  - pandoc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html 
+  - pandoc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html  --toc
   - mv examples public
   artifacts:
     paths:
