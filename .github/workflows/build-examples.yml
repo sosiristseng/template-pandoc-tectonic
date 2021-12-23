@@ -26,7 +26,7 @@ jobs:
         pip install pandoc-latex-environment
     - name: Setup pandoc
       env:
-        PANDOC_VERSION: "2.16.1"
+        PANDOC_VERSION: "2.16.2"
       run: |
         wget -qO- https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux-amd64.tar.gz | sudo tar xzf - --strip-components 1 -C /usr/local/
     - name: Setup tectonic
