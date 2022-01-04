@@ -19,7 +19,7 @@ jobs:
     - name: Install mamba
       uses: mamba-org/provision-with-micromamba@main
     - name: Setup fonts and image convertion tool
-      run: sudo apt-get update -qq && sudo apt-get install fonts-noto-cjk poppler-utils -y
+      run: sudo apt-get update -qq && sudo apt-get install fonts-noto-cjk poppler-utils -qqy
     - name: Build pdf files
       shell: bash -l {0}
       run: cd examples && bash build-examples.sh && cd ..
