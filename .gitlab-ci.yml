@@ -4,7 +4,7 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
 before_script:
-  - sudo apt-get update -qq && sudo apt-get install fonts-noto-cjk -qqy
+  - su - -c "apt-get update -qq && apt-get install fonts-noto-cjk -qqy"
   - micromamba install -y -f environment.yml -n base
   # - source activate tectonic
   - (cd examples; bash build-examples.sh)
