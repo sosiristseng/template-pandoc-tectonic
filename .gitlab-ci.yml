@@ -1,11 +1,11 @@
-image: mambaorg/micromamba:0.19.1
+image: condaforge/mambaforge:4.11.0-0
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
 before_script:
-  - su - -c "apt-get update -qq && apt-get install fonts-noto-cjk -qqy"
-  - micromamba install -y -f environment.yml -n base
+  - apt-get update -qq && apt-get install fonts-noto-cjk -qqy
+  - mamba env update -n base --file environment.yml
   # - source activate tectonic
   - (cd examples; bash build-examples.sh)
 
