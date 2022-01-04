@@ -5,22 +5,22 @@ variables:
 
 before_script:
   - apt-get update -qq && apt-get install fonts-noto-cjk -qqy
-  - mamba env update -n base --file environment.yml
-  # - source activate tectonic
+  - mamba env create --file environment.yml
+  - source activate tectonic
   - (cd examples; bash build-examples.sh)
+  - pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
 
 tests:
   script:
-  - echo "Build complete!"
-  except:
-  - main
+    - echo "Build complete!"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 pages:
   script:
-  - pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
-  - mv examples public
+    - mv examples public
   artifacts:
     paths:
-    - public
-  only:
-  - main
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
