@@ -26,13 +26,7 @@ for f in *; do
     		echo ""
     	else
     		echo "building '$f'"
-    		cd "$f"
-    		echo "    - running pandoc build script"
-        	bash "$PWD/build.sh"
-        	echo "    - generating preview"
-        	pdftoppm -r 150 -png "document.pdf" > "preview.png"
-        	echo ""
-        	cd ".."
+			(cd "$f"; echo "Running pandoc build script and generating preview"; bash "$PWD/build.sh" && pdftoppm -r 150 -png "document.pdf" > "preview.png"; echo "")
     	fi
     fi
 done
