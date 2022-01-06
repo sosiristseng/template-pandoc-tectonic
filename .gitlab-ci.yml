@@ -1,4 +1,4 @@
-image: condaforge/mambaforge:4.11.0
+image: condaforge/mambaforge:4.11.0-0
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
