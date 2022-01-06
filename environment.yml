@@ -8,4 +8,4 @@ dependencies:
   - tectonic=0.8.0
   - pip=21.3.1
   - pip:
-    - pandoc-latex-environment
+      - pandoc-latex-environment

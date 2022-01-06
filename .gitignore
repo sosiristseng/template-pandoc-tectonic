@@ -2,3 +2,5 @@
 document.pdf
 # Built by script
 preview.png
+# Environment folder
+.env/
