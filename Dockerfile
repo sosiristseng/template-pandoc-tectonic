@@ -11,7 +11,7 @@ COPY --from=pandoc/core:2.17.1 /usr/local/bin/pandoc-crossref /usr/local/bin/
 
 # Install apt packages
 RUN apt-get update -qq \
-    && DEBIAN_FRONTEND=noninteractive apt-get install --qqy --no-install-recommends \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -qqy --no-install-recommends \
        libfontconfig1 libgraphite2-3 libharfbuzz0b libicu67 zlib1g libharfbuzz-icu0 libssl1.1 ca-certificates \
        poppler-utils librsvg2-bin fonts-noto-cjk \ 
     && rm -rf /var/lib/apt/lists/*
