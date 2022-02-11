@@ -1,3 +1,7 @@
+FROM dxjoke/tectonic-docker:0.8.0-bullseye-biber as tectonic
+
+FROM pandoc/core:2.17.1 as pandoc
+
 FROM python:3.10-slim
 
 # Install apt packages
@@ -13,13 +17,13 @@ COPY requirements.txt /usr/src/app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy tectonic binary files and caches
-COPY --from=dxjoke/tectonic-docker:0.8.0-bullseye-biber /usr/bin/tectonic /usr/local/bin/
-COPY --from=dxjoke/tectonic-docker:0.8.0-bullseye-biber /usr/bin/biber /usr/local/bin/
-COPY --from=dxjoke/tectonic-docker:0.8.0-bullseye-biber /root/.cache/Tectonic/ /root/.cache/Tectonic/
+COPY --from=tectonic /usr/bin/tectonic /usr/local/bin/
+COPY --from=tectonic /usr/bin/biber /usr/local/bin/
+COPY --from=tectonic /root/.cache/Tectonic/ /root/.cache/Tectonic/
 
 # Copy pandoc binary
-COPY --from=pandoc/core:2.17.1 /usr/local/bin/pandoc /usr/local/bin/
-COPY --from=pandoc/core:2.17.1 /usr/local/bin/pandoc-crossref /usr/local/bin/
+COPY --from=pandoc /usr/local/bin/pandoc /usr/local/bin/
+COPY --from=pandoc /usr/local/bin/pandoc-crossref /usr/local/bin/
 
 # pandoc commands
 CMD ["pandoc", "--pdf-engine=tectonic"]
