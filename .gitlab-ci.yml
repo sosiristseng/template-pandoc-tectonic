@@ -36,17 +36,20 @@ docker-build:
 tests:
   image: "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
   stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' 
   script:
     - (cd examples; bash build-examples.sh)
-    - pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
   artifacts:
     paths:
       - examples
 
 pages:
-  image: alpine:latest
+  image: "$CI_REGISTRY_IMAGE:latest"
   stage: deploy
   script:
+    - (cd examples; bash build-examples.sh)
+    - pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
     - mv examples public
   artifacts:
     paths:
