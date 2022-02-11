@@ -1,6 +1,5 @@
 FROM dxjoke/tectonic-docker:0.8.0-bullseye-biber as tectonic
-
-FROM pandoc/core:2.17.1 as pandoc
+FROM pandoc/core:2.17.1-ubuntu as pandoc
 
 FROM python:3.10-slim
 
@@ -8,7 +7,8 @@ FROM python:3.10-slim
 RUN apt-get update -qq \
     && apt-get install -qqy --no-install-recommends \
        libfontconfig1 libgraphite2-3 libharfbuzz0b libicu67 zlib1g libharfbuzz-icu0 libssl1.1 ca-certificates \
-       poppler-utils librsvg2-bin fonts-noto-cjk \ 
+       liblua5.3-0 librsvg2-bin lua-lpeg libatomic1 libgmp10 libpcre3 libyaml zlib1g \
+       poppler-utils fonts-noto-cjk \ 
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app
