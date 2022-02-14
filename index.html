@@ -130,13 +130,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <article class="markdown-body">
 <header>
 <h1 class="title followed-by-subtitle">Pandoc tectonic template</h1>
-<p class="subtitle">Building publication-ready documents from Markdown</p>
+<p class="subtitle">Building publication-ready documents from
+Markdown</p>
 </header>
 <hr>
 <nav id="TOC">
 <h1 class="toc-title">Contents</h1>
 <ul>
-<li><a href="#how-to-develop-this-template">How to develop this template</a></li>
+<li><a href="#how-to-develop-this-template">How to develop this
+template</a></li>
 <li><a href="#showcase">Showcase</a>
 <ul>
 <li><a href="#basic-example">Basic Example</a></li>
@@ -144,15 +146,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#book">Book</a></li>
 <li><a href="#boxes-awesomebox">Boxes (Awesomebox)</a></li>
 <li><a href="#boxes-tcolorbox">Boxes (tcolorbox)</a></li>
-<li><a href="#code-blocks-with-listings">Code blocks (with listings)</a></li>
-<li><a href="#code-blocks-without-listings">Code blocks (without listings)</a></li>
+<li><a href="#code-blocks-with-listings">Code blocks (with
+listings)</a></li>
+<li><a href="#code-blocks-without-listings">Code blocks (without
+listings)</a></li>
 <li><a href="#header-and-footer">Header and Footer</a></li>
 <li><a href="#images-and-tables">Images and Tables</a></li>
 <li><a href="#chinese-support">Chinese support</a></li>
 <li><a href="#german-support">German support</a></li>
 <li><a href="#japanese-suppport">Japanese suppport</a></li>
 <li><a href="#page-background">Page background</a></li>
-<li><a href="#title-page-with-background">Title page with background</a></li>
+<li><a href="#title-page-with-background">Title page with
+background</a></li>
 <li><a href="#title-custom-page">Title (custom page)</a></li>
 <li><a href="#title-default-page">Title (default page)</a></li>
 <li><a href="#title-green-page">Title (green page)</a></li>
@@ -163,126 +168,183 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr>
 <p>This template is powered by:</p>
 <ul>
-<li><a href="https://pandoc.org/">pandoc</a>, a universal document converter.</li>
-<li><a href="https://tectonic-typesetting.github.io/en-US/">tectonic</a>, a modernized, complete, self-contained TeX/LaTeX engine.</li>
-<li><a href="https://github.com/Wandmalfarbe/pandoc-latex-template">Eisvogel</a>, a clean pandoc LaTeX template to convert your markdown files to PDF or LaTeX.</li>
-<li><a href="https://github.com/features/actions">GitHub actions</a>, to compile pushed Markdown files to pdf documents automatically.</li>
+<li><a href="https://pandoc.org/">pandoc</a>, a universal document
+converter.</li>
+<li><a
+href="https://tectonic-typesetting.github.io/en-US/">tectonic</a>, a
+modernized, complete, self-contained TeX/LaTeX engine.</li>
+<li><a
+href="https://github.com/Wandmalfarbe/pandoc-latex-template">Eisvogel</a>,
+a clean pandoc LaTeX template to convert your markdown files to PDF or
+LaTeX.</li>
+<li><a href="https://github.com/features/actions">GitHub actions</a>, to
+compile pushed Markdown files to pdf documents automatically.</li>
 </ul>
 <h2 id="how-to-develop-this-template">How to develop this template</h2>
 <p>Clone this repository along with its submodule:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/sosiristseng/template-pandoc-tectonic.git <span class="at">--recursive</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/sosiristseng/template-pandoc-tectonic.git <span class="at">--recursive</span></span></code></pre></div>
 <h2 id="showcase">Showcase</h2>
 <h3 id="basic-example">Basic Example</h3>
-<p><a href="basic-example/document.pdf">PDF</a> / <a href="basic-example/document.md">Markdown</a></p>
+<p><a href="basic-example/document.pdf">PDF</a> / <a
+href="basic-example/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="basic-example/preview.png" alt="Basic Example" /><figcaption aria-hidden="true">Basic Example</figcaption>
+<img src="basic-example/preview.png" alt="Basic Example" />
+<figcaption aria-hidden="true">Basic Example</figcaption>
 </figure>
 <h3 id="beamer">Beamer</h3>
-<p><a href="beamer/document.pdf">PDF</a> / <a href="beamer/document.md">Markdown</a></p>
+<p><a href="beamer/document.pdf">PDF</a> / <a
+href="beamer/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="beamer/preview.png" alt="Beamer" /><figcaption aria-hidden="true">Beamer</figcaption>
+<img src="beamer/preview.png" alt="Beamer" />
+<figcaption aria-hidden="true">Beamer</figcaption>
 </figure>
 <h3 id="book">Book</h3>
-<p><a href="book/document.pdf">PDF</a> / <a href="book/document.md">Markdown</a></p>
+<p><a href="book/document.pdf">PDF</a> / <a
+href="book/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="book/preview.png" alt="Book" /><figcaption aria-hidden="true">Book</figcaption>
+<img src="book/preview.png" alt="Book" />
+<figcaption aria-hidden="true">Book</figcaption>
 </figure>
 <h3 id="boxes-awesomebox">Boxes (Awesomebox)</h3>
 <p>Requires <code>pandoc-latex-environment</code> Python package.</p>
-<p><a href="boxes-with-pandoc-latex-environment-and-awesomebox/document.pdf">PDF</a> / <a href="boxes-with-pandoc-latex-environment-and-awesomebox/document.md">Markdown</a></p>
+<p><a
+href="boxes-with-pandoc-latex-environment-and-awesomebox/document.pdf">PDF</a>
+/ <a
+href="boxes-with-pandoc-latex-environment-and-awesomebox/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="boxes-with-pandoc-latex-environment-and-awesomebox/preview.png" alt="Boxes" /><figcaption aria-hidden="true">Boxes</figcaption>
+<img
+src="boxes-with-pandoc-latex-environment-and-awesomebox/preview.png"
+alt="Boxes" />
+<figcaption aria-hidden="true">Boxes</figcaption>
 </figure>
 <h3 id="boxes-tcolorbox">Boxes (tcolorbox)</h3>
 <p>Requires <code>pandoc-latex-environment</code> Python package.</p>
-<p><a href="boxes-with-pandoc-latex-environment-and-tcolorbox/document.md">PDF</a> / <a href="boxes-with-pandoc-latex-environment-and-tcolorbox/document.md">Markdown</a></p>
+<p><a
+href="boxes-with-pandoc-latex-environment-and-tcolorbox/document.md">PDF</a>
+/ <a
+href="boxes-with-pandoc-latex-environment-and-tcolorbox/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="boxes-with-pandoc-latex-environment-and-tcolorbox/preview.png" alt="Boxes" /><figcaption aria-hidden="true">Boxes</figcaption>
+<img src="boxes-with-pandoc-latex-environment-and-tcolorbox/preview.png"
+alt="Boxes" />
+<figcaption aria-hidden="true">Boxes</figcaption>
 </figure>
 <h3 id="code-blocks-with-listings">Code blocks (with listings)</h3>
-<p><a href="code-blocks-listings/document.pdf">PDF</a> / <a href="code-blocks-listings/document.md">Markdown</a></p>
+<p><a href="code-blocks-listings/document.pdf">PDF</a> / <a
+href="code-blocks-listings/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="code-blocks-listings/preview.png" alt="Code" /><figcaption aria-hidden="true">Code</figcaption>
+<img src="code-blocks-listings/preview.png" alt="Code" />
+<figcaption aria-hidden="true">Code</figcaption>
 </figure>
-<h3 id="code-blocks-without-listings">Code blocks (without listings)</h3>
-<p><a href="code-blocks-without-listings/document.pdf">PDF</a> / <a href="code-blocks-without-listings/document.md">Markdown</a></p>
+<h3 id="code-blocks-without-listings">Code blocks (without
+listings)</h3>
+<p><a href="code-blocks-without-listings/document.pdf">PDF</a> / <a
+href="code-blocks-without-listings/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="code-blocks-without-listings/preview.png" alt="Code" /><figcaption aria-hidden="true">Code</figcaption>
+<img src="code-blocks-without-listings/preview.png" alt="Code" />
+<figcaption aria-hidden="true">Code</figcaption>
 </figure>
 <h3 id="header-and-footer">Header and Footer</h3>
-<p><a href="header-and-footer/document.pdf">PDF</a> / <a href="header-and-footer/document.md">Markdown</a></p>
+<p><a href="header-and-footer/document.pdf">PDF</a> / <a
+href="header-and-footer/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="header-and-footer/preview.png" alt="Header and Footer" /><figcaption aria-hidden="true">Header and Footer</figcaption>
+<img src="header-and-footer/preview.png" alt="Header and Footer" />
+<figcaption aria-hidden="true">Header and Footer</figcaption>
 </figure>
 <h3 id="images-and-tables">Images and Tables</h3>
-<p><a href="images-and-tables/document.pdf">PDF</a> / <a href="images-and-tables/document.md">Markdown</a></p>
+<p><a href="images-and-tables/document.pdf">PDF</a> / <a
+href="images-and-tables/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="images-and-tables/preview.png" alt="Images and Tables" /><figcaption aria-hidden="true">Images and Tables</figcaption>
+<img src="images-and-tables/preview.png" alt="Images and Tables" />
+<figcaption aria-hidden="true">Images and Tables</figcaption>
 </figure>
 <h3 id="chinese-support">Chinese support</h3>
-<p>Proper Chinese fonts have to be installed (In this case, Noto fonts) and use <code>-V CJKmainfont=</code> option e.g. <code>-V CJKmainfont="Noto Sans CJK TC"</code>.</p>
-<p><a href="language-chinese/document.pdf">PDF</a> / <a href="language-chinese/document.md">Markdown</a></p>
+<p>Proper Chinese fonts have to be installed (In this case, Noto fonts)
+and use <code>-V CJKmainfont=</code> option
+e.g. <code>-V CJKmainfont="Noto Sans CJK TC"</code>.</p>
+<p><a href="language-chinese/document.pdf">PDF</a> / <a
+href="language-chinese/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="language-chinese/preview.png" alt="Chinese support" /><figcaption aria-hidden="true">Chinese support</figcaption>
+<img src="language-chinese/preview.png" alt="Chinese support" />
+<figcaption aria-hidden="true">Chinese support</figcaption>
 </figure>
 <h3 id="german-support">German support</h3>
-<p><a href="language-german/document.pdf">PDF</a> / <a href="language-german/document.md">Markdown</a></p>
+<p><a href="language-german/document.pdf">PDF</a> / <a
+href="language-german/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="language-german/preview.png" alt="Japanese support" /><figcaption aria-hidden="true">Japanese support</figcaption>
+<img src="language-german/preview.png" alt="Japanese support" />
+<figcaption aria-hidden="true">Japanese support</figcaption>
 </figure>
 <h3 id="japanese-suppport">Japanese suppport</h3>
-<p>Proper Japanese fonts have to be installed (In this case, Noto fonts) and use <code>-V CJKmainfont=</code> option e.g. <code>-V CJKmainfont="Noto Sans CJK JP"</code>.</p>
-<p><a href="language-japanese/document.pdf">PDF</a> / <a href="language-japanese/document.md">Markdown</a></p>
+<p>Proper Japanese fonts have to be installed (In this case, Noto fonts)
+and use <code>-V CJKmainfont=</code> option
+e.g. <code>-V CJKmainfont="Noto Sans CJK JP"</code>.</p>
+<p><a href="language-japanese/document.pdf">PDF</a> / <a
+href="language-japanese/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="language-japanese/preview.png" alt="Japanese support" /><figcaption aria-hidden="true">Japanese support</figcaption>
+<img src="language-japanese/preview.png" alt="Japanese support" />
+<figcaption aria-hidden="true">Japanese support</figcaption>
 </figure>
 <h3 id="page-background">Page background</h3>
-<p><a href="page-background/document.pdf">PDF</a> / <a href="page-background/document.md">Markdown</a></p>
+<p><a href="page-background/document.pdf">PDF</a> / <a
+href="page-background/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="page-background/preview.png" alt="Page background" /><figcaption aria-hidden="true">Page background</figcaption>
+<img src="page-background/preview.png" alt="Page background" />
+<figcaption aria-hidden="true">Page background</figcaption>
 </figure>
 <h3 id="title-page-with-background">Title page with background</h3>
-<p><a href="title-page-background/document.pdf">PDF</a> / <a href="title-page-background/document.md">Markdown</a></p>
+<p><a href="title-page-background/document.pdf">PDF</a> / <a
+href="title-page-background/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="title-page-background/preview.png" alt="Title page background" /><figcaption aria-hidden="true">Title page background</figcaption>
+<img src="title-page-background/preview.png"
+alt="Title page background" />
+<figcaption aria-hidden="true">Title page background</figcaption>
 </figure>
 <h3 id="title-custom-page">Title (custom page)</h3>
-<p><a href="title-page-custom/document.pdf">PDF</a> / <a href="title-page-custom/document.md">Markdown</a></p>
+<p><a href="title-page-custom/document.pdf">PDF</a> / <a
+href="title-page-custom/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="title-page-custom/preview.png" alt="Title page custom" /><figcaption aria-hidden="true">Title page custom</figcaption>
+<img src="title-page-custom/preview.png" alt="Title page custom" />
+<figcaption aria-hidden="true">Title page custom</figcaption>
 </figure>
 <h3 id="title-default-page">Title (default page)</h3>
-<p><a href="title-page-default/document.pdf">PDF</a> / <a href="title-page-default/document.md">Markdown</a></p>
+<p><a href="title-page-default/document.pdf">PDF</a> / <a
+href="title-page-default/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="title-page-default/preview.png" alt="Title page default" /><figcaption aria-hidden="true">Title page default</figcaption>
+<img src="title-page-default/preview.png" alt="Title page default" />
+<figcaption aria-hidden="true">Title page default</figcaption>
 </figure>
 <h3 id="title-green-page">Title (green page)</h3>
-<p><a href="title-page-green/document.pdf">PDF</a> / <a href="title-page-green/document.md">Markdown</a></p>
+<p><a href="title-page-green/document.pdf">PDF</a> / <a
+href="title-page-green/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="title-page-green/preview.png" alt="Title page green" /><figcaption aria-hidden="true">Title page green</figcaption>
+<img src="title-page-green/preview.png" alt="Title page green" />
+<figcaption aria-hidden="true">Title page green</figcaption>
 </figure>
 <h3 id="title-page-with-logo">Title (page with logo)</h3>
-<p><a href="title-page-logo/document.pdf">PDF</a> / <a href="title-page-logo/document.md">Markdown</a></p>
+<p><a href="title-page-logo/document.pdf">PDF</a> / <a
+href="title-page-logo/document.md">Markdown</a></p>
 <p><em>Preview</em></p>
 <figure>
-<img src="title-page-logo/preview.png" alt="Title page green" /><figcaption aria-hidden="true">Title page green</figcaption>
+<img src="title-page-logo/preview.png" alt="Title page green" />
+<figcaption aria-hidden="true">Title page green</figcaption>
 </figure>
 </article>
 </body>
