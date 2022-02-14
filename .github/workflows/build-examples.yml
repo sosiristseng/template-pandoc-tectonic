@@ -2,6 +2,9 @@ name: Build Example PDF files
 
 on: [push, pull_request]
 
+env:
+  PDC_VER: "2.17.1.1"
+
 jobs:
   build:
     runs-on: ubuntu-latest
