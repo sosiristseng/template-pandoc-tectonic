@@ -39,7 +39,7 @@ push latest:
     GIT_STRATEGY: none
   stage: push
   only:
-    - $CI_DEFAULT_BRANCH
+    - master
   script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
@@ -80,4 +80,4 @@ pages:
     paths:
       - public
   only:
-    - $CI_DEFAULT_BRANCH
+    - master
