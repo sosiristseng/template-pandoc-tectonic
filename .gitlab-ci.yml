@@ -19,7 +19,7 @@ docker-build:
   script:
     - |
       if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
-        tag=""
+        tag=":latest"
         echo "Running on default branch '$CI_DEFAULT_BRANCH': tag = 'latest'"
       else
         tag=":$CI_COMMIT_REF_SLUG"
@@ -28,7 +28,7 @@ docker-build:
     - docker build --pull -t "${CI_REGISTRY_IMAGE}${tag}" .
     - |
       if [[ -z ${CI_COMMIT_TAG+x} ]]; then
-        docker tag "${CI_REGISTRY_IMAGE}${tag}" "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
+        docker tag "${CI_PROJECT_NAME}${tag}" "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
       fi
     - docker push --all-tags
   # Run this job in a branch where a Dockerfile exists
