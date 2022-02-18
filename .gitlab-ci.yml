@@ -61,8 +61,6 @@ push tag:
 test image:
   image: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
   stage: test
-  rules:
-    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' 
   script:
     - (cd examples; bash build-examples.sh)
   artifacts:
