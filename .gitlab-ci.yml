@@ -2,9 +2,6 @@ image: docker:latest
 services:
   - docker:dind
 
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
-
 stages:
   - build
   - push
@@ -57,6 +54,8 @@ push tag:
 test image:
   image: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
   stage: test
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
   script:
     - (cd examples; bash build-examples.sh)
   artifacts:
@@ -68,6 +67,8 @@ test image:
 pages:
   image: "$CI_REGISTRY_IMAGE:latest"
   stage: deploy
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
   script:
     - (cd examples; bash build-examples.sh)
     - pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
