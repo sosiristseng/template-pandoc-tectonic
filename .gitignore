@@ -119,3 +119,6 @@ document.pdf
 
 # Built by the script
 preview.png
+
+# VSCode local config
+.vscode/
