@@ -6,6 +6,8 @@ on:
       - Dockerfile
       - requirements.txt
       - .github/workflows/docker.yml
+    tags:
+      - *.*
   pull_request:
     paths:
       - Dockerfile
@@ -36,6 +38,10 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+            type=pep440,pattern={{version}}
+            type=pep440,pattern={{major}}.{{minor}}
+            type=ref,event=pr
+            type=sha
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
