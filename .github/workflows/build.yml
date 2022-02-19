@@ -46,12 +46,12 @@ jobs:
             examples/*/document.pdf
             examples/*/preview.png
       - name: Build index page
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
       - name: Deploy to GitHub pages
         uses: peaceiris/actions-gh-pages@v3.8.0
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force_orphan: false
