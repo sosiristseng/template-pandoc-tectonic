@@ -7,7 +7,7 @@ on:
       - requirements.txt
       - .github/workflows/docker.yml
     tags:
-      - *.*
+      - "*"
   pull_request:
     paths:
       - Dockerfile
