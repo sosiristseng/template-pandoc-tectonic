@@ -25,7 +25,9 @@ docker-build:
       --label "org.opencontainers.image.version=$CI_COMMIT_REF_NAME"
       --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
       .
+    # Also tag the image latest if it's on main
     - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
+    # Also tag the version if exists
     - "[[ ${#CI_COMMIT_TAG} -gt 0 ]] && docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG"
     - docker push $CI_REGISTRY_IMAGE --all-tags
   only:
