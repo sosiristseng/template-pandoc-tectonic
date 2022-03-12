@@ -3,6 +3,15 @@ FROM pandoc/core:2.17.1-ubuntu as pandoc
 
 FROM python:3.10-slim
 
+# Copy tectonic binary files and caches
+COPY --from=tectonic /usr/bin/tectonic /usr/local/bin/
+COPY --from=tectonic /usr/bin/biber /usr/local/bin/
+COPY --from=tectonic /root/.cache/Tectonic/ /root/.cache/Tectonic/
+
+# Copy pandoc binary
+COPY --from=pandoc /usr/local/bin/pandoc /usr/local/bin/
+COPY --from=pandoc /usr/local/bin/pandoc-crossref /usr/local/bin/
+
 # Install apt packages
 RUN apt-get update -qq \
     && apt-get install -qqy --no-install-recommends \
@@ -13,17 +22,8 @@ RUN apt-get update -qq \
 
 WORKDIR /usr/src/app
 
-COPY requirements.txt /usr/src/app/
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy tectonic binary files and caches
-COPY --from=tectonic /usr/bin/tectonic /usr/local/bin/
-# COPY --from=tectonic /usr/bin/biber /usr/local/bin/
-COPY --from=tectonic /root/.cache/Tectonic/ /root/.cache/Tectonic/
-
-# Copy pandoc binary
-COPY --from=pandoc /usr/local/bin/pandoc /usr/local/bin/
-COPY --from=pandoc /usr/local/bin/pandoc-crossref /usr/local/bin/
 
 # pandoc commands
 CMD ["pandoc", "--pdf-engine=tectonic"]
