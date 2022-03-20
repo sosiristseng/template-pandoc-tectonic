@@ -1,16 +1,4 @@
-FROM dxjoke/tectonic-docker:0.8.0-bullseye-biber as tectonic
-FROM pandoc/core:2.17.1-ubuntu as pandoc
-
 FROM python:3.10-slim
-
-# Copy tectonic binary files and caches
-COPY --from=tectonic /usr/bin/tectonic /usr/local/bin/
-COPY --from=tectonic /usr/bin/biber /usr/local/bin/
-COPY --from=tectonic /root/.cache/Tectonic/ /root/.cache/Tectonic/
-
-# Copy pandoc binary
-COPY --from=pandoc /usr/local/bin/pandoc /usr/local/bin/
-COPY --from=pandoc /usr/local/bin/pandoc-crossref /usr/local/bin/
 
 # Install apt packages
 RUN apt-get update -qq \
@@ -20,10 +8,19 @@ RUN apt-get update -qq \
     poppler-utils fonts-noto-cjk \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Copy tectonic binaries and caches
+COPY --from=dxjoke/tectonic-docker:0.8.0-bullseye-biber /usr/bin/tectonic /usr/local/bin/
+COPY --from=dxjoke/tectonic-docker:0.8.0-bullseye-biber /usr/bin/biber /usr/local/bin/
+COPY --from=dxjoke/tectonic-docker:0.8.0-bullseye-biber /root/.cache/Tectonic/ /root/.cache/Tectonic/
+
+# Copy pandoc binaries
+COPY --from=pandoc/core:2.17.1-ubuntu /usr/local/bin/pandoc /usr/local/bin/
+COPY --from=pandoc/core:2.17.1-ubuntu /usr/local/bin/pandoc-crossref /usr/local/bin/
+
 WORKDIR /usr/src/app
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -U pip wheel setuptools && pip install --no-cache-dir -r requirements.txt
 
 # pandoc commands
 CMD ["pandoc", "--pdf-engine=tectonic"]
