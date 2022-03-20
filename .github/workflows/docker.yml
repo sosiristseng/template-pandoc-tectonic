@@ -2,6 +2,7 @@ name: Build Docker image
 
 on:
   push:
+    branches: [main]
     paths:
       - Dockerfile
       - requirements.txt
@@ -9,10 +10,7 @@ on:
     tags:
       - "*"
   pull_request:
-    paths:
-      - Dockerfile
-      - requirements.txt
-      - .github/workflows/docker.yml
+    paths: [main]
   workflow_dispatch:
 
 env:
