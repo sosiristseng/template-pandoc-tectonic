@@ -22,7 +22,7 @@ jobs:
           echo "Installing pandoc version ${PDC_VER}"
           wget -qO- https://github.com/jgm/pandoc/releases/download/${PDC_VER}/pandoc-${PDC_VER}-linux-amd64.tar.gz | sudo tar xvzf - --strip-components 1 -C /usr/local/
       - name: Tectonic Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.cache/Tectonic
           key: ${{ runner.os }}-tectonic-${{ hashFiles('**/*.tex') }}
