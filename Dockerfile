@@ -14,8 +14,8 @@ COPY --from=dxjoke/tectonic-docker:0.8.0-bullseye-biber /usr/bin/biber /usr/loca
 COPY --from=dxjoke/tectonic-docker:0.8.0-bullseye-biber /root/.cache/Tectonic/ /root/.cache/Tectonic/
 
 # Copy pandoc binaries
-COPY --from=pandoc/core:2.17.1-ubuntu /usr/local/bin/pandoc /usr/local/bin/
-COPY --from=pandoc/core:2.17.1-ubuntu /usr/local/bin/pandoc-crossref /usr/local/bin/
+COPY --from=pandoc/core:2.18.0-ubuntu /usr/local/bin/pandoc /usr/local/bin/
+COPY --from=pandoc/core:2.18.0-ubuntu /usr/local/bin/pandoc-crossref /usr/local/bin/
 
 WORKDIR /usr/src/app
 
