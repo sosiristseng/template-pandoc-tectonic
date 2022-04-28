@@ -9,9 +9,9 @@ RUN apt-get update -qq \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Copy tectonic binaries and caches
-COPY --from=dxjoke/tectonic-docker:0.8.0-bullseye-biber /usr/bin/tectonic /usr/local/bin/
-COPY --from=dxjoke/tectonic-docker:0.8.0-bullseye-biber /usr/bin/biber /usr/local/bin/
-COPY --from=dxjoke/tectonic-docker:0.8.0-bullseye-biber /root/.cache/Tectonic/ /root/.cache/Tectonic/
+COPY --from=dxjoke/tectonic-docker:0.9.0-bullseye-biber /usr/bin/tectonic /usr/local/bin/
+COPY --from=dxjoke/tectonic-docker:0.9.0-bullseye-biber /usr/bin/biber /usr/local/bin/
+COPY --from=dxjoke/tectonic-docker:0.9.0-bullseye-biber /root/.cache/Tectonic/ /root/.cache/Tectonic/
 
 # Copy pandoc binaries
 COPY --from=pandoc/core:2.18.0-ubuntu /usr/local/bin/pandoc /usr/local/bin/
