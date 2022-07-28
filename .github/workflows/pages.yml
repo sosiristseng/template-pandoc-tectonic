@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 env:
-  PDC_VER: "2.17.1.1"
-  TECTONIC_VER: "0.8.0"
+  PDC_VER: '2.18'
+  TECTONIC_VER: '0.9.0'
 
 jobs:
   build:
@@ -35,8 +35,8 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
-          cache: "pip"
+          python-version: '3.10'
+          cache: 'pip'
       - run: pip install -r requirements.txt
       - name: Setup fonts and image convertion tool
         run: sudo apt-get update -qq && sudo apt-get install fonts-noto-cjk poppler-utils -qqy
@@ -50,13 +50,25 @@ jobs:
             examples/*/document.pdf
             examples/*/preview.png
       - name: Build index page
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
-      - name: Deploy to GitHub pages
-        uses: peaceiris/actions-gh-pages@v3.8.0
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+          pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.htmm
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force_orphan: false
-          publish_dir: ./examples
+          path: ./examples
+
+  # Deployment job
+  deploy:
+    needs: build
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
