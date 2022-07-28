@@ -51,7 +51,10 @@ jobs:
             examples/*/preview.png
       - name: Build index page
         run: |
-          pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.htmm
+          pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v1
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
