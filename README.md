@@ -2,13 +2,6 @@
 
 Compile Markdown files to beautiful PDF document, powered by `pandoc` and `tectonic`.
 
-## Mirrors
-
-- GitHub: <https://github.com/NTUMitoLab/template-pandoc-tectonic>
-- GitLab: <https://gitlab.com/wwtemplates/pandoc-tectonic>
-
-## Recipes
-
 This template uses
 
 - [pandoc](https://pandoc.org/), a universal document converter.
