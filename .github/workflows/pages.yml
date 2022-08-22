@@ -48,7 +48,7 @@ jobs:
           pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v1
+        uses: actions/configure-pages@v2
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
