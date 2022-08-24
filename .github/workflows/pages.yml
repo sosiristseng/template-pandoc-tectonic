@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  PDC_VER: '2.19'
+  PDC_VER: '2.19.2'
   TECTONIC_VER: '0.9.0'
   PY_VER: '3.10'
 
@@ -18,6 +18,11 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PY_VER }}
+          cache: 'pip'
       - name: Setup pandoc
         run: |
           echo "Installing pandoc version ${PDC_VER}"
@@ -33,12 +38,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           tectonic-version: ${{ env.TECTONIC_VER }}
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ env.PY_VER }}
-          cache: 'pip'
-      - run: pip install -r requirements.txt
+      - name: Python dependencies
+        run: pip install -r requirements.txt
       - name: Setup fonts and image convertion tool
         run: sudo apt-get update -qq && sudo apt-get install fonts-noto-cjk poppler-utils -qqy
       - name: Build pdf files
