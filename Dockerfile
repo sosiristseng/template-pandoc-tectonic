@@ -11,9 +11,9 @@ RUN apt-get update -q \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Copy tectonic binaries and caches
-COPY --from=dxjoke/tectonic-docker:0.9.0-bullseye-biber /usr/bin/tectonic /usr/local/bin/
-COPY --from=dxjoke/tectonic-docker:0.9.0-bullseye-biber /usr/bin/biber /usr/local/bin/
-COPY --from=dxjoke/tectonic-docker:0.9.0-bullseye-biber /root/.cache/Tectonic/ /root/.cache/Tectonic/
+COPY --from=dxjoke/tectonic-docker:0.9.0-alpine-biber /usr/bin/tectonic /usr/local/bin/
+COPY --from=dxjoke/tectonic-docker:0.9.0-alpine-biber /usr/bin/biber /usr/local/bin/
+COPY --from=dxjoke/tectonic-docker:0.9.0-alpine-biber /root/.cache/Tectonic/ /root/.cache/Tectonic/
 
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
