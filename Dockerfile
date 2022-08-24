@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM pandoc/core:2.19.2-ubuntu
 
 WORKDIR /work
 
@@ -6,8 +6,8 @@ WORKDIR /work
 RUN apt-get update -qq \
     && apt-get install -qqy --no-install-recommends \
     libfontconfig1 libgraphite2-3 libharfbuzz0b libicu67 zlib1g libharfbuzz-icu0 libssl1.1 ca-certificates \
-    liblua5.3-0 librsvg2-bin lua-lpeg libatomic1 libgmp10 libpcre3 libyaml-0-2 zlib1g libffi8 \
-    poppler-utils fonts-noto-cjk \
+    liblua5.3-0 librsvg2-bin lua-lpeg libatomic1 libgmp10 libpcre3 libyaml-0-2 zlib1g \
+    python3-pip poppler-utils fonts-noto-cjk \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Copy tectonic binaries and caches
@@ -15,12 +15,8 @@ COPY --from=dxjoke/tectonic-docker:0.9.0-bullseye-biber /usr/bin/tectonic /usr/l
 COPY --from=dxjoke/tectonic-docker:0.9.0-bullseye-biber /usr/bin/biber /usr/local/bin/
 COPY --from=dxjoke/tectonic-docker:0.9.0-bullseye-biber /root/.cache/Tectonic/ /root/.cache/Tectonic/
 
-# Copy pandoc binaries
-COPY --from=pandoc/core:2.19.2-ubuntu /usr/local/bin/pandoc /usr/local/bin/
-COPY --from=pandoc/core:2.19.2-ubuntu /usr/local/bin/pandoc-crossref /usr/local/bin/
-
 COPY requirements.txt .
-RUN pip install --no-cache-dir -U pip wheel setuptools && pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 # pandoc commands
 CMD ["pandoc", "--pdf-engine=tectonic"]
