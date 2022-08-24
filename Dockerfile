@@ -16,8 +16,8 @@ COPY --from=dxjoke/tectonic-docker:0.9.0-bullseye-biber /usr/bin/biber /usr/loca
 COPY --from=dxjoke/tectonic-docker:0.9.0-bullseye-biber /root/.cache/Tectonic/ /root/.cache/Tectonic/
 
 # Copy pandoc binaries
-COPY --from=pandoc/core:2.19.0-ubuntu /usr/local/bin/pandoc /usr/local/bin/
-COPY --from=pandoc/core:2.19.0-ubuntu /usr/local/bin/pandoc-crossref /usr/local/bin/
+COPY --from=pandoc/core:2.19.2-ubuntu /usr/local/bin/pandoc /usr/local/bin/
+COPY --from=pandoc/core:2.19.2-ubuntu /usr/local/bin/pandoc-crossref /usr/local/bin/
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -U pip wheel setuptools && pip install --no-cache-dir -r requirements.txt
