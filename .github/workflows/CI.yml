@@ -58,6 +58,38 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./examples
+  # Deployment job
+  docker-push:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/setup-buildx-action@v2
+      - uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,priority=600, enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
+            type=sha,enable=true,priority=100,prefix=,suffix=,format=long
+          flavor: |
+            latest=false
+      - name: Push Docker Image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   # Deployment job
   deploy:
