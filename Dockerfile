@@ -1,5 +1,7 @@
 FROM python:3.10-slim
 
+WORKDIR /work
+
 # Install apt packages
 RUN apt-get update -qq \
     && apt-get install -qqy --no-install-recommends \
@@ -16,8 +18,6 @@ COPY --from=dxjoke/tectonic-docker:0.9.0-bullseye-biber /root/.cache/Tectonic/ /
 # Copy pandoc binaries
 COPY --from=pandoc/core:2.19.0-ubuntu /usr/local/bin/pandoc /usr/local/bin/
 COPY --from=pandoc/core:2.19.0-ubuntu /usr/local/bin/pandoc-crossref /usr/local/bin/
-
-WORKDIR /usr/src/app
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -U pip wheel setuptools && pip install --no-cache-dir -r requirements.txt
