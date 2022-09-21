@@ -1,1 +1,0 @@
-pandoc-latex-environment==1.1.6
