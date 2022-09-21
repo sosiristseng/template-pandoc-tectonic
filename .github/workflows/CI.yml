@@ -37,6 +37,7 @@ jobs:
           load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      - run: docker run ${{ env.IMAGE_NAME }}:test pandoc --version
       - uses: addnab/docker-run-action@v3
         with:
           image: ${{ env.IMAGE_NAME }}:test
