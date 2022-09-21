@@ -12,9 +12,6 @@ concurrency:
 
 jobs:
   build:
-    defaults:
-      run:
-        shell: bash -l {0} # Run login sheel by default for the mamba environment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -36,8 +33,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-tectonic-
       - name: Build pdf files
+        shell: bash -l {0}
         run: cd examples && bash build-examples.sh && cd ..
       - name: Build index page
+        shell: bash -l {0}
         run: |
           pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
       - name: Setup Pages
