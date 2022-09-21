@@ -37,8 +37,10 @@ jobs:
           load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - run: docker run -v ${{ github.workspace }}:/tmp/work -w /tmp/work ${{ env.IMAGE_NAME }}:test bash -c 'cd examples && bash build-examples.sh && cd ..'
-      - run: docker run -v ${{ github.workspace }}:/tmp/work -w /tmp/work ${{ env.IMAGE_NAME }}:test pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
+      - name: Build documents
+        run: docker run -v ${{ github.workspace }}:/tmp/work -w /tmp/work ${{ env.IMAGE_NAME }}:test bash -c 'cd examples && bash build-examples.sh && cd ..'
+      - name: Build homepage
+        run: docker run -v ${{ github.workspace }}:/tmp/work -w /tmp/work ${{ env.IMAGE_NAME }}:test pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v2
