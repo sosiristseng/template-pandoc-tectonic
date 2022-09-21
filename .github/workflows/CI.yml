@@ -37,14 +37,8 @@ jobs:
           load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - run: docker run ${{ env.IMAGE_NAME }}:test pandoc --version
-      - uses: addnab/docker-run-action@v3
-        with:
-          image: ${{ env.IMAGE_NAME }}:test
-          options: -v ${{ github.workspace }}:/work
-          run: |
-            cd /work/examples && bash build-examples.sh && cd ..
-            pandoc --toc --template=/work/GitHub.html5 /work/examples/index.md -o /work/examples/index.html
+      - run: docker run -v ${{ github.workspace }}:/work ${{ env.IMAGE_NAME }}:test bash -c 'cd examples && bash build-examples.sh && cd ..'
+      - run: docker run -v ${{ github.workspace }}:/work ${{ env.IMAGE_NAME }}:test pandoc --toc --template=/work/GitHub.html5 /work/examples/index.md -o /work/examples/index.html
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v2
