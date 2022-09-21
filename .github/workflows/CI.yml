@@ -1,0 +1,90 @@
+name: Build Docker Image and Build Documents
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Setup buildx
+        uses: docker/setup-buildx-action@v2
+      - uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Docker Image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          tags: ${{ env.IMAGE_NAME }}:test
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: ${{ env.IMAGE_NAME }}:test
+          options: -v ${{ github.workspace }}:/work
+          run: |
+            cd /work/examples && bash build-examples.sh && cd ..
+            pandoc --toc --template=/work/GitHub.html5 /work/examples/index.md -o /work/examples/index.html
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v2
+      - name: Upload page artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./examples
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,priority=600, enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
+            type=sha,enable=true,priority=100,prefix=,suffix=,format=long
+          flavor: |
+            latest=false
+      - name: Push Docker Image
+        uses: docker/build-push-action@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # Deploy pages
+  deploy:
+    needs: ci
+    if: github.ref == 'refs/heads/main'
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
