@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:0.26.0
+FROM mambaorg/micromamba:0.27.0
 USER root
 RUN apt-get update && \
     apt-get install -y fonts-noto-cjk --no-install-recommends && \
