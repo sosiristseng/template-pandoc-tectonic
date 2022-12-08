@@ -1,6 +1,6 @@
 FROM python:3.11.1-slim
 
-ARG lua_version=5.4
+ARG lua_version=5.3
 
 WORKDIR /usr/src
 
