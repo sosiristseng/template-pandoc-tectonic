@@ -24,7 +24,7 @@ jobs:
         with:
           submodules: recursive
       - name: Install system packages
-        run: sudo apt update && sudo apt install -y libfuse2 poppler-utils fonts-noto-cjk
+        run: sudo apt update && sudo apt install -y libfuse2 poppler-utils fonts-noto-cjk gdebi-core
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
