@@ -1,4 +1,4 @@
-name: Build Docker Image and Build Documents
+name: Build Documents
 
 on:
   push:
