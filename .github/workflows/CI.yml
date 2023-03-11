@@ -12,7 +12,7 @@ concurrency:
 
 env:
   PYTHON_VER: '3.11'
-  PANDOC_VERSION: '2.19.2'
+  PANDOC_VERSION: '3.1.1'
   TECTONIC_VERSION: '0.12.0'
 
 jobs:
