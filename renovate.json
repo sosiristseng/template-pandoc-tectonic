@@ -12,5 +12,6 @@
     "git-submodules": {
       "enabled": true
     },
-    "platformAutomerge": true
+    "platformAutomerge": true,
+    "automergeStrategy": "squash"
   }
