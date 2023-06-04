@@ -10,11 +10,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  PYTHON_VER: '3.11'
-  PANDOC_VERSION: '3.1.1'
-  TECTONIC_VERSION: '0.12.0'
-
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -24,33 +19,27 @@ jobs:
         with:
           submodules: recursive
       - name: Install system packages
-        run: sudo apt update && sudo apt install -y libfuse2 poppler-utils fonts-noto-cjk gdebi-core
-      - name: Setup Python
-        uses: actions/setup-python@v4
+        run: sudo apt update && sudo apt install -y fonts-noto-cjk
+      - name: Setup micromamba
+        uses: mamba-org/setup-micromamba@v1
         with:
-          python-version: ${{ env.PYTHON_VER }}
-          cache: 'pip' # caching pip dependencies
-      - run: pip install -r requirements.txt
-      - name: Setup pandoc
-        uses: r-lib/actions/setup-pandoc@v2
-        with:
-          pandoc-version: ${{ env.PANDOC_VERSION }}
-      - name: Setup tectonic
-        uses: wtfjoke/setup-tectonic@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          tectonic-version: ${{ env.TECTONIC_VERSION }}
+          environment-file: environment.yml
+          init-shell: bash
+          cache-environment: true
+          post-cleanup: 'all'
       - name: Build documents
+        shell: micromamba-shell {0}
         run: bash -c 'cd examples && bash build-examples.sh && cd ..'
       - name: Build homepage
-        if: github.ref == 'refs/heads/main'
+        shell: micromamba-shell {0}
+        if: ${{ github.ref == 'refs/heads/main' }}
         run: pandoc --toc --template=GitHub.html5 ./examples/index.md -o ./examples/index.html
       - name: Setup Pages
-        if: github.ref == 'refs/heads/main'
+        if: ${{ github.ref == 'refs/heads/main' }}
         id: pages
         uses: actions/configure-pages@v3
       - name: Upload page artifact
-        if: github.ref == 'refs/heads/main'
+        if: ${{ github.ref == 'refs/heads/main' }}
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./examples
