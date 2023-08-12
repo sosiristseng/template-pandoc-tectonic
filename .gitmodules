@@ -1,3 +1,4 @@
 [submodule "eisvogel"]
 	path = eisvogel
 	url = https://github.com/Wandmalfarbe/pandoc-latex-template.git
+	shallow=true
