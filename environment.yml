@@ -8,4 +8,4 @@ dependencies:
   - poppler
   - pip
   - pip:
-      - pandoc-latex-environment==1.1.6
+    - pandoc-latex-environment==1.1.6
